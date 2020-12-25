@@ -23,8 +23,8 @@ def random_vin():
 	vin = ''.join(list1)
 	return vin
 
-print("<-----------汽车Vin码生成器v1.0----------->")
 def Vin_make():
+	print("<-----------汽车Vin码生成器v1.0----------->")
 	num=int(input("请输入您想要生成vin码的个数："))
 	time.sleep(2)
 	print("请稍等，生成中……")

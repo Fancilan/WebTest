@@ -42,11 +42,10 @@ def Person_make():
                 man=Women_name()
             else:
                 man=Man_name()
-            #生成最小年龄为19岁，最大年龄为45岁的省份证号
+            #生成最小年龄为19岁，最大年龄为45岁的身份证号
             Name.append(str(man))
             Phone.append(str(phone))
             ID.append(str('\n')+str(is_id))
-
             #\n换个行可使身份证号后几位不消失，变为文本显示
         else:
             break
