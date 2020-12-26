@@ -40,7 +40,7 @@ def Vin_make():
 			break
 	end_time = time.time()
 	time.sleep(1)
-	print("导出成功Success！")
+	print("导出成功Success！导出文件在根目录下")
 	print('Running time: %.2f Seconds' % (end_time - start_time) + '\n')
 	file.close()
 	end=input("按任意键退出程序！")

@@ -90,7 +90,7 @@ def person_make():
     msg = str("人员采集数量设置成功:" + str(person) + "人")
     print(msg)
     time.sleep(0.5)
-    print(str("导出成功Success！"))
+    print(str("导出成功Success！导出文件在根目录下"))
     time.sleep(1)
     print("人员信息预览:")
     print(np.array(ALL))
