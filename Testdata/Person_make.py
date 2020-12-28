@@ -23,11 +23,16 @@ def person_make():
     ID = []
     Birthday = []
     Sex = []
-    num = int(input("请输入您想生成人员采集的数量:"))
-    person = num
-    time.sleep(1)
+    while True:
+        num = int(input("请输入您想生成人员数量:"))
+        person = num
+        if person>=100000:
+            print("人员数量超过最大生成限制，请重新输入！")
+        else:
+            break
+    time.sleep(0.5)
     print("请稍等,人员生成中………")
-    time.sleep(1)
+    time.sleep(0.5)
     start_time = time.time()
     for i in range(person):
         if i < person:
@@ -37,7 +42,7 @@ def person_make():
             # 生成手机号码
             is_id = fake.ssn(min_age=19, max_age=45)
             date = is_id
-            sex_id = date[16]
+            sex_id = date[-2]
             if int(sex_id) % 2 == 0:
                 man = women_name()
             else:
@@ -60,7 +65,7 @@ def person_make():
         #日期显示与身份证同理，\t'''
     for y in ID:
         date_1 = y
-        se_id = date_1[17:18]
+        se_id = date_1[-2]
         if int(se_id) % 2 == 0:  # 身份证男女校验，身份证第17位数为奇数为男，偶数为女
             sex = "女"
             Sex.append(sex)
@@ -87,7 +92,7 @@ def person_make():
     file.close()
     end_time = time.time()
     time.sleep(1.5)
-    msg = str("人员采集数量设置成功:" + str(person) + "人")
+    msg = str("人员采集数量:" + str(person) + "人,成功！")
     print(msg)
     time.sleep(0.5)
     print(str("导出成功Success！导出文件在根目录下"))
@@ -96,7 +101,7 @@ def person_make():
     print(np.array(ALL))
     print(str('\n'))
     time.sleep(1)
-    print('Running time: %.2f Seconds' % (end_time - start_time) + '\n')
-    input("请按任意键退出,谢谢！")
+    print('Running time: %.2f 秒' % (end_time - start_time) + '\n')
+    end=input("请按任意键退出,谢谢！")
 
 person_make()
