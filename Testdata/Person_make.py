@@ -91,7 +91,7 @@ def person_make():
     # 写入数据
     file.close()
     end_time = time.time()
-    time.sleep(1.5)
+    time.sleep(1)
     msg = str("人员采集数量:" + str(person) + "人,成功！")
     print(msg)
     time.sleep(0.5)
