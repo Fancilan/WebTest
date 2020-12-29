@@ -33,8 +33,6 @@ def person_make():
             print("再见。")
             time.sleep(0.5)
             quit()
-        # if num>='100000':
-        # print("人员数量超过最大生成限制，请重新输入！")
         elif num == '0':
             print("人数为0，你逗我玩呢？请重新输入！")
         elif num == '':
