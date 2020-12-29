@@ -85,7 +85,7 @@ def person_make():
             Sex.append(sex)
     ALL = [[] for i in range(person)]
     # 设置一个二维数组
-    for x in range(0, person):
+    for x in range(person):
         ALL[x].append(Name[x])
         ALL[x].append(Sex[x])
         ALL[x].append(ID[x])
