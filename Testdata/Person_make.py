@@ -24,15 +24,28 @@ def person_make():
     Birthday = []
     Sex = []
     while True:
-        num = int(input("请输入您想生成人员数量:"))
-        person = num
-        if person>=100000:
+        num = input("请输入您想生成人员数量:")
+        # person = int(num)
+        if num == 'out':
+            time.sleep(1)
+            print("感谢您的使用！")
+            time.sleep(0.5)
+            print("再见。")
+            time.sleep(0.5)
+            quit()
+        # if num>='100000':
+        # print("人员数量超过最大生成限制，请重新输入！")
+        elif num == '0':
+            print("人数为0，你逗我玩呢？请重新输入！")
+        elif num == '':
+            print("请重新输入，再输入回车削你！")
+        elif int(num) >= 1000000:
             print("人员数量超过最大生成限制，请重新输入！")
         else:
             break
+    person = int(num)
     time.sleep(0.5)
     print("请稍等,人员生成中………")
-    time.sleep(0.5)
     start_time = time.time()
     for i in range(person):
         if i < person:
@@ -81,7 +94,7 @@ def person_make():
         ALL[x].append(Phone[x])
         ALL[x].append(Birthday[x])
     # 二维数组循环插入，为导出CSV数据格式作准备
-    file = open("PersonData.csv", "w", newline='', encoding="UTF-8-sig")
+    file = open("\\Users\cpr019\Desktop\PersonData.csv", "w", newline='', encoding="UTF-8-sig")
     # newline解决空白行问题
     fwrite = csv.writer(file)
     header = ["Name", "Sex", "ID", "Phone", "Birthday"]
@@ -91,12 +104,12 @@ def person_make():
     # 写入数据
     file.close()
     end_time = time.time()
-    time.sleep(1)
+    time.sleep(0.5)
     msg = str("人员采集数量:" + str(person) + "人,成功！")
     print(msg)
     time.sleep(0.5)
     print(str("导出成功Success！导出文件在根目录下"))
-    time.sleep(1)
+    time.sleep(0.5)
     print("人员信息预览:")
     print(np.array(ALL))
     print(str('\n'))
