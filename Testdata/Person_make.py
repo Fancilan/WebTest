@@ -29,7 +29,7 @@ def export_data(ALL,person,start_time):
     # 写入变量名
     fwrite.writerow(header)
     fwrite.writerows(ALL)
-    # 写入数据
+    # 写入数据嗯
     file.close()
     end_time = time.time()
     time.sleep(0.5)
