@@ -23,7 +23,7 @@ def man_name_choice(first_name):
 
 def person_make():
     global fake
-    print("<---------人员信息测试数据生成系统v1.2--------->")
+    print("<---------人员信息测试数据生成系统v1.2.1--------->")
     # 生成fake实例
     fake = Faker(locale='zh_CN')
     '''如果要生成中文的随机数据，我们可以在实例化时给locale参数传入‘zh_CN’这个值'''
@@ -32,30 +32,30 @@ def person_make():
     ID = []
     Birthday = []
     Sex = []
+    # if select == 2:
+    while True:
+        num = input("请输入您想生成人员数量:")
+        # person = int(num)
+        if num == 'out':
+            time.sleep(1)
+            print("感谢您的使用！")
+            time.sleep(0.5)
+            print("再见。")
+            time.sleep(0.5)
+            quit()
+        elif num == '0':
+            print("人数为0，你逗我玩呢？请重新输入！")
+        elif num == '':
+            print("请重新输入，再输入回车削你！")
+        elif int(num) >= 1000000:
+            print("人员数量超过最大生成限制，请重新输入！")
+        else:
+            break
+    person = int(num)
+    time.sleep(0.5)
     print("1.自定义姓氏模式\n2.随机姓氏模式")
     select = int(input("请选择您要生成人员的信息的模式:"))
     if select == 2:
-        while True:
-            num = input("请输入您想生成人员数量:")
-            # person = int(num)
-            if num == 'out':
-                time.sleep(1)
-                print("感谢您的使用！")
-                time.sleep(0.5)
-                print("再见。")
-                time.sleep(0.5)
-                quit()
-            elif num == '0':
-                print("人数为0，你逗我玩呢？请重新输入！")
-            elif num == '':
-                print("请重新输入，再输入回车削你！")
-            elif int(num) >= 1000000:
-                print("人员数量超过最大生成限制，请重新输入！")
-            else:
-                break
-        person = int(num)
-        time.sleep(0.5)
-        print("请稍等,人员生成中………")
         start_time = time.time()
         for i in range(person):
             if i < person:
@@ -77,78 +77,8 @@ def person_make():
                 # \n换个行可使身份证号后几位不消失，变为文本显示
             else:
                 break
-        for n in ID:
-            date = n
-            year = date[7:11]
-            month = date[11:13]
-            date = date[13:15]
-            birthday = year + '-' + month + '-' + date
-            Birthday.append(str('\t') + birthday)
-            '''提取身份证日期，然后输出为标准格式XXXX-XX-XX
-            #日期显示与身份证同理，\t'''
-        for y in ID:
-            date_1 = y
-            se_id = date_1[-2]
-            if int(se_id) % 2 == 0:  # 身份证男女校验，身份证第17位数为奇数为男，偶数为女
-                sex = "女"
-                Sex.append(sex)
-            else:
-                sex = "男"
-                Sex.append(sex)
-        ALL = [[] for i in range(person)]
-        # 设置一个二维数组
-        for x in range(person):
-            ALL[x].append(Name[x])
-            ALL[x].append(Sex[x])
-            ALL[x].append(ID[x])
-            ALL[x].append(Phone[x])
-            ALL[x].append(Birthday[x])
-        # 二维数组循环插入，为导出CSV数据格式作准备
-        file = open("\\Users\cpr019\Desktop\PersonData.csv", "w", newline='', encoding="UTF-8-sig")
-        # newline解决空白行问题
-        fwrite = csv.writer(file)
-        header = ["Name", "Sex", "ID", "Phone", "Birthday"]
-        # 写入变量名
-        fwrite.writerow(header)
-        fwrite.writerows(ALL)
-        # 写入数据
-        file.close()
-        end_time = time.time()
-        time.sleep(0.5)
-        msg = str("人员采集数量:" + str(person) + "人,成功！")
-        print(msg)
-        time.sleep(0.5)
-        print(str("导出成功Success！导出文件在根目录下"))
-        time.sleep(0.5)
-        print("人员信息预览:")
-        print(np.array(ALL))
-        print(str('\n'))
-        time.sleep(1)
-        print('Running time: %.2f 秒' % (end_time - start_time) + '\n')
-        end=input("请按任意键退出,谢谢！")
     else:
-        while True:
-            num = input("请输入您想生成人员数量:")
-            # person = int(num)
-            if num == 'out':
-                time.sleep(1)
-                print("感谢您的使用！")
-                time.sleep(0.5)
-                print("再见。")
-                time.sleep(0.5)
-                quit()
-            elif num == '0':
-                print("人数为0，你逗我玩呢？请重新输入！")
-            elif num == '':
-                print("请重新输入，再输入回车削你！")
-            elif int(num) >= 1000000:
-                print("人员数量超过最大生成限制，请重新输入！")
-            else:
-                break
         first_name = input("请输入您自定义的姓氏:")
-        person = int(num)
-        time.sleep(0.5)
-        print("请稍等,人员生成中………")
         start_time = time.time()
         for i in range(person):
             if i < person:
@@ -170,54 +100,54 @@ def person_make():
                 # \n换个行可使身份证号后几位不消失，变为文本显示
             else:
                 break
-        for n in ID:
-            date = n
-            year = date[7:11]
-            month = date[11:13]
-            date = date[13:15]
-            birthday = year + '-' + month + '-' + date
-            Birthday.append(str('\t') + birthday)
-            '''提取身份证日期，然后输出为标准格式XXXX-XX-XX
-            #日期显示与身份证同理，\t'''
-        for y in ID:
-            date_1 = y
-            se_id = date_1[-2]
-            if int(se_id) % 2 == 0:  # 身份证男女校验，身份证第17位数为奇数为男，偶数为女
-                sex = "女"
-                Sex.append(sex)
-            else:
-                sex = "男"
-                Sex.append(sex)
-        ALL = [[] for i in range(person)]
-        # 设置一个二维数组
-        for x in range(person):
-            ALL[x].append(Name[x])
-            ALL[x].append(Sex[x])
-            ALL[x].append(ID[x])
-            ALL[x].append(Phone[x])
-            ALL[x].append(Birthday[x])
-        # 二维数组循环插入，为导出CSV数据格式作准备
-        file = open("\\Users\cpr019\Desktop\PersonData.csv", "w", newline='', encoding="UTF-8-sig")
-        # newline解决空白行问题
-        fwrite = csv.writer(file)
-        header = ["Name", "Sex", "ID", "Phone", "Birthday"]
-        # 写入变量名
-        fwrite.writerow(header)
-        fwrite.writerows(ALL)
-        # 写入数据
-        file.close()
-        end_time = time.time()
-        time.sleep(0.5)
-        msg = str("人员采集数量:" + str(person) + "人,成功！")
-        print(msg)
-        time.sleep(0.5)
-        print(str("导出成功Success！导出文件在根目录下"))
-        time.sleep(0.5)
-        print("人员信息预览:")
-        print(np.array(ALL))
-        print(str('\n'))
-        time.sleep(1)
-        print('Running time: %.2f 秒' % (end_time - start_time) + '\n')
-        end=input("请按任意键退出,谢谢！")
+    for n in ID:
+        date = n
+        year = date[7:11]
+        month = date[11:13]
+        date = date[13:15]
+        birthday = year + '-' + month + '-' + date
+        Birthday.append(str('\t') + birthday)
+        '''提取身份证日期，然后输出为标准格式XXXX-XX-XX
+        #日期显示与身份证同理，\t'''
+    for y in ID:
+        date_1 = y
+        se_id = date_1[-2]
+        if int(se_id) % 2 == 0:  # 身份证男女校验，身份证第17位数为奇数为男，偶数为女
+            sex = "女"
+            Sex.append(sex)
+        else:
+            sex = "男"
+            Sex.append(sex)
+    ALL = [[] for i in range(person)]
+    # 设置一个二维数组
+    for x in range(person):
+        ALL[x].append(Name[x])
+        ALL[x].append(Sex[x])
+        ALL[x].append(ID[x])
+        ALL[x].append(Phone[x])
+        ALL[x].append(Birthday[x])
+    # 二维数组循环插入，为导出CSV数据格式作准备
+    file = open("\\Users\cpr019\Desktop\PersonData.csv", "w", newline='', encoding="UTF-8-sig")
+    # newline解决空白行问题
+    fwrite = csv.writer(file)
+    header = ["Name", "Sex", "ID", "Phone", "Birthday"]
+    # 写入变量名
+    fwrite.writerow(header)
+    fwrite.writerows(ALL)
+    # 写入数据
+    file.close()
+    end_time = time.time()
+    time.sleep(0.5)
+    msg = str("人员采集数量:" + str(person) + "人,成功！")
+    print(msg)
+    time.sleep(0.5)
+    print(str("导出成功Success！导出文件在根目录下"))
+    time.sleep(0.5)
+    print("人员信息预览:")
+    print(np.array(ALL))
+    print(str('\n'))
+    time.sleep(1)
+    print('Running time: %.2f 秒' % (end_time - start_time) + '\n')
+    end=input("请按任意键退出,谢谢！")
 
 person_make()
