@@ -32,7 +32,6 @@ def person_make():
     ID = []
     Birthday = []
     Sex = []
-    # if select == 2:
     while True:
         num = input("请输入您想生成人员数量:")
         # person = int(num)
