@@ -21,9 +21,33 @@ def man_name_choice(first_name):
     return name
     # 自定义姓氏+男名
 
+def export_data(ALL,person,start_time):
+    file = open("\\Users\cpr019\Desktop\PersonData.csv", "w", newline='', encoding="UTF-8-sig")
+    # newline解决空白行问题
+    fwrite = csv.writer(file)
+    header = ["Name", "Sex", "ID", "Phone", "Birthday"]
+    # 写入变量名
+    fwrite.writerow(header)
+    fwrite.writerows(ALL)
+    # 写入数据
+    file.close()
+    end_time = time.time()
+    time.sleep(0.5)
+    msg = str("人员采集数量:" + str(person) + "人,成功！")
+    print(msg)
+    time.sleep(0.5)
+    print(str("导出成功Success！导出文件在根目录下"))
+    time.sleep(0.5)
+    print("人员信息预览:")
+    print(np.array(ALL))
+    print(str('\n'))
+    time.sleep(1)
+    print('Running time: %.2f 秒' % (end_time - start_time) + '\n')
+    end = input("请按任意键退出,谢谢！")
+
 def person_make():
     global fake
-    print("<---------人员信息测试数据生成系统v1.2.1--------->")
+    print("<---------人员信息测试数据生成系统v1.2.2--------->")
     # 生成fake实例
     fake = Faker(locale='zh_CN')
     '''如果要生成中文的随机数据，我们可以在实例化时给locale参数传入‘zh_CN’这个值'''
@@ -125,28 +149,6 @@ def person_make():
         ALL[x].append(ID[x])
         ALL[x].append(Phone[x])
         ALL[x].append(Birthday[x])
+    export_data(ALL,person,start_time)
     # 二维数组循环插入，为导出CSV数据格式作准备
-    file = open("\\Users\cpr019\Desktop\PersonData.csv", "w", newline='', encoding="UTF-8-sig")
-    # newline解决空白行问题
-    fwrite = csv.writer(file)
-    header = ["Name", "Sex", "ID", "Phone", "Birthday"]
-    # 写入变量名
-    fwrite.writerow(header)
-    fwrite.writerows(ALL)
-    # 写入数据
-    file.close()
-    end_time = time.time()
-    time.sleep(0.5)
-    msg = str("人员采集数量:" + str(person) + "人,成功！")
-    print(msg)
-    time.sleep(0.5)
-    print(str("导出成功Success！导出文件在根目录下"))
-    time.sleep(0.5)
-    print("人员信息预览:")
-    print(np.array(ALL))
-    print(str('\n'))
-    time.sleep(1)
-    print('Running time: %.2f 秒' % (end_time - start_time) + '\n')
-    end=input("请按任意键退出,谢谢！")
-
 person_make()
