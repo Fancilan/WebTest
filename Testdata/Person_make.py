@@ -32,6 +32,7 @@ def export_data(ALL,person,start_time):
     # 写入数据嗯
     file.close()
     end_time = time.time()
+    final_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     time.sleep(0.5)
     msg = str("人员采集数量:" + str(person) + "人,成功！")
     print(msg)
@@ -42,12 +43,15 @@ def export_data(ALL,person,start_time):
     print(np.array(ALL))
     print(str('\n'))
     time.sleep(1)
-    print('Running time: %.2f 秒' % (end_time - start_time) + '\n')
+    print('程序开始时间：' + origin_time)
+    print('程序结束时间：' + final_time)
+    print('Running time: %.3f 秒' % (end_time - start_time) + '\n')
     end = input("请按任意键退出,谢谢！")
 
 def person_make():
     global fake
-    print("<---------人员信息测试数据生成系统v1.2.2--------->")
+    global origin_time
+    print("<---------人员信息测试数据生成系统v1.2.5--------->")
     # 生成fake实例
     fake = Faker(locale='zh_CN')
     '''如果要生成中文的随机数据，我们可以在实例化时给locale参数传入‘zh_CN’这个值'''
@@ -78,8 +82,11 @@ def person_make():
     time.sleep(0.5)
     print("1.自定义姓氏模式\n2.随机姓氏模式")
     select = int(input("请选择您要生成人员的信息的模式:"))
+    time.sleep(0.5)
+    print("请稍等，人员数据生成中…………")
     if select == 2:
         start_time = time.time()
+        origin_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         for i in range(person):
             if i < person:
                 # man = fake.name_male()
@@ -91,8 +98,21 @@ def person_make():
                 sex_id = date[-2]
                 if int(sex_id) % 2 == 0:
                     man = women_name()
+                    while True:
+                        man_1 = women_name()
+                        if man == man_1:
+                            continue
+                        else:
+                            break
                 else:
                     man = man_name()
+                    while True:
+                        man_1 = man_name()
+                        if man == man_1:
+                            continue
+                        else:
+                            break
+
                 # 生成最小年龄为19岁，最大年龄为45岁的身份证号
                 Name.append(str(man))
                 Phone.append(str(phone))
@@ -103,6 +123,7 @@ def person_make():
     else:
         first_name = input("请输入您自定义的姓氏:")
         start_time = time.time()
+        origin_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         for i in range(person):
             if i < person:
                 # man = fake.name_male()
@@ -114,8 +135,20 @@ def person_make():
                 sex_id = date[-2]
                 if int(sex_id) % 2 == 0:
                     man = women_name_choice(first_name)
+                    while True:
+                        man_1 = women_name_choice(first_name)
+                        if man == man_1:
+                            continue
+                        else:
+                            break
                 else:
                     man = man_name_choice(first_name)
+                    while True:
+                        man_1 = man_name_choice(first_name)
+                        if man == man_1:
+                            continue
+                        else:
+                            break
                 # 生成最小年龄为19岁，最大年龄为45岁的身份证号
                 Name.append(str(man))
                 Phone.append(str(phone))
@@ -149,6 +182,7 @@ def person_make():
         ALL[x].append(ID[x])
         ALL[x].append(Phone[x])
         ALL[x].append(Birthday[x])
+        # 二维数组循环插入，为导出CSV数据格式作准备
     export_data(ALL,person,start_time)
-    # 二维数组循环插入，为导出CSV数据格式作准备
+
 person_make()
