@@ -83,8 +83,8 @@ def person_make():
     print("1.自定义姓氏模式\n2.随机姓氏模式")
     select = int(input("请选择您要生成人员的信息的模式:"))
     time.sleep(0.5)
-    print("请稍等，人员数据生成中…………")
     if select == 2:
+        print("请稍等，人员数据生成中…………")
         start_time = time.time()
         origin_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         for i in range(person):
@@ -121,7 +121,13 @@ def person_make():
             else:
                 break
     else:
-        first_name = input("请输入您自定义的姓氏:")
+        while True:
+            first_name = input("请输入您自定义的姓氏:")
+            if first_name == '':
+                print("请重新输入，再输入回车削你！")
+            else:
+                break
+        print("请稍等，人员数据生成中…………")
         start_time = time.time()
         origin_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         for i in range(person):
@@ -185,4 +191,15 @@ def person_make():
         # 二维数组循环插入，为导出CSV数据格式作准备
     export_data(ALL,person,start_time)
 
-person_make()
+def start():
+    while True:
+        password = input("请输入密码:")
+        if password != '123':
+            print("密码错误请重新输入")
+        else:
+            print("登陆成功！")
+            time.sleep(1)
+            person_make()
+
+
+start()
