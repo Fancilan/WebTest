@@ -3,6 +3,9 @@ from faker import Faker
 import csv
 import time
 import numpy as np
+import getpass
+import random
+
 
 def women_name():
     name = fake.first_name() + fake.first_name_female()
@@ -22,7 +25,10 @@ def man_name_choice(first_name):
     # 自定义姓氏+男名
 
 def export_data(ALL,person,start_time):
-    file = open("\\Users\cpr019\Desktop\PersonData.csv", "w", newline='', encoding="UTF-8-sig")
+    cal = str(time.strftime("%Y-%m-%d", time.localtime())) +'-' +str(''.join(random.sample('0123456789',5)))
+    user_name = getpass.getuser()# 获取当前用户名
+    data_name = 'C:\\Users\\' + user_name +'\\Desktop\\data_'+ cal +'.csv'
+    file = open(data_name, "w", newline='', encoding="UTF-8-sig")
     # newline解决空白行问题
     fwrite = csv.writer(file)
     header = ["Name", "Sex", "ID", "Phone", "Birthday"]
@@ -46,12 +52,18 @@ def export_data(ALL,person,start_time):
     print('程序开始时间：' + origin_time)
     print('程序结束时间：' + final_time)
     print('Running time: %.3f 秒' % (end_time - start_time) + '\n')
-    end = input("请按任意键退出,谢谢！")
+    print("文件路径:"+ data_name)
+    time.sleep(1)
+    end = int(input("请问还要继续生成人员数据么？\n1.是\n2.否\n:"))
+    if end == 1:
+        person_make()
+    else:
+        eend = input("请按任意键退出,谢谢！")
 
 def person_make():
     global fake
     global origin_time
-    print("<---------人员信息测试数据生成系统v1.2.5--------->")
+    # print("<---------人员信息测试数据生成系统v1.2.5--------->")
     # 生成fake实例
     fake = Faker(locale='zh_CN')
     '''如果要生成中文的随机数据，我们可以在实例化时给locale参数传入‘zh_CN’这个值'''
@@ -97,24 +109,26 @@ def person_make():
                 date = is_id
                 sex_id = date[-2]
                 if int(sex_id) % 2 == 0:
-                    man = women_name()
+                    man_A = women_name()
                     while True:
-                        man_1 = women_name()
-                        if man == man_1:
+                        man_B = women_name()
+                        if man_A == man_B:
                             continue
                         else:
+                            Name.append(str(man_A))
                             break
                 else:
-                    man = man_name()
+                    man_c = man_name()
                     while True:
-                        man_1 = man_name()
-                        if man == man_1:
+                        man_d = man_name()
+                        if man_c == man_d:
                             continue
                         else:
+                            Name.append(str(man_c))
                             break
 
                 # 生成最小年龄为19岁，最大年龄为45岁的身份证号
-                Name.append(str(man))
+                # Name.append(str(man))
                 Phone.append(str(phone))
                 ID.append(str('\n') + str(is_id))
                 # \n换个行可使身份证号后几位不消失，变为文本显示
@@ -140,23 +154,24 @@ def person_make():
                 date = is_id
                 sex_id = date[-2]
                 if int(sex_id) % 2 == 0:
-                    man = women_name_choice(first_name)
+                    man1 = women_name_choice(first_name)
                     while True:
-                        man_1 = women_name_choice(first_name)
-                        if man == man_1:
+                        man2 = women_name_choice(first_name)
+                        if man1 == man2:
                             continue
                         else:
+                            Name.append(str(man1))
                             break
                 else:
-                    man = man_name_choice(first_name)
+                    man3 = man_name_choice(first_name)
                     while True:
-                        man_1 = man_name_choice(first_name)
-                        if man == man_1:
+                        man4 = man_name_choice(first_name)
+                        if man3 == man4:
                             continue
                         else:
+                            Name.append(str(man3))
                             break
                 # 生成最小年龄为19岁，最大年龄为45岁的身份证号
-                Name.append(str(man))
                 Phone.append(str(phone))
                 ID.append(str('\n') + str(is_id))
                 # \n换个行可使身份证号后几位不消失，变为文本显示
@@ -192,14 +207,16 @@ def person_make():
     export_data(ALL,person,start_time)
 
 def start():
-    while True:
-        password = input("请输入密码:")
-        if password != '123':
-            print("密码错误请重新输入")
-        else:
-            print("登陆成功！")
-            time.sleep(1)
-            person_make()
+    # while True:
+    #     password = input("请输入密码:")
+    #     if password != '123':
+    #         print("密码错误请重新输入")
+    #     else:
+    #         print("登陆成功！")
+    #         time.sleep(1)
+    print("<---------人员信息测试数据生成系统v1.2.5--------->")
+    person_make()
 
 
 start()
+

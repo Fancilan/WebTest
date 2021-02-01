@@ -6,6 +6,7 @@ import random
 
 class Name():
 
+
     def random_firstname(self):
         smaple = '''赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜
                     戚谢邹喻柏水窦章云苏潘葛奚范彭郎鲁韦昌马苗凤花方俞任袁柳酆鲍史唐
@@ -24,10 +25,9 @@ class Name():
                     公孙仲孙轩辕令狐钟离宇文长孙慕容鲜于闾丘司徒司空丌官司寇仉督子车
                     颛孙端木巫马公西漆雕乐正壤驷公良拓跋夹谷宰父谷梁晋楚闫法汝鄢涂钦
                     段干百里东郭南门呼延归海羊舌微生岳帅缑亢况郈有琴梁丘左丘东门西门
-                    商牟佘佴伯赏南宫墨哈谯笪年爱阳佟第五言福百家姓终
-        '''
-        first_name = random.choice(smaple)
-        return str(first_name)
+                    商牟佘佴伯赏南宫墨哈谯笪年爱阳佟第五言福百家姓终'''
+        first_name_A = random.choice(smaple)
+        return str(first_name_A)
 
 
 
