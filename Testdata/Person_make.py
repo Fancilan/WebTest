@@ -207,16 +207,8 @@ def person_make():
     export_data(ALL,person,start_time)
 
 def start():
-    # while True:
-    #     password = input("请输入密码:")
-    #     if password != '123':
-    #         print("密码错误请重新输入")
-    #     else:
-    #         print("登陆成功！")
-    #         time.sleep(1)
-    print("<---------人员信息测试数据生成系统v1.2.5--------->")
+    print("<---------人员信息测试数据生成系统v1.3--------->")
     person_make()
-
 
 start()
 
