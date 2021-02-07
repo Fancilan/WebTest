@@ -25,7 +25,7 @@ def man_name_choice(first_name):
     # 自定义姓氏+男名
 
 def export_data(ALL,person,start_time):
-    cal = str(time.strftime("%Y-%m-%d", time.localtime())) +'-' +str(''.join(random.sample('0123456789',5)))
+    cal = str(time.strftime("%Y-%m-%d", time.localtime())) +'-' +str(''.join(random.sample('0123456789',6)))
     user_name = getpass.getuser()# 获取当前用户名
     data_name = 'C:\\Users\\' + user_name +'\\Desktop\\data_'+ cal +'.csv'
     file = open(data_name, "w", newline='', encoding="UTF-8-sig")
@@ -54,7 +54,7 @@ def export_data(ALL,person,start_time):
     print('Running time: %.3f 秒' % (end_time - start_time) + '\n')
     print("文件路径:"+ data_name)
     time.sleep(1)
-    end = int(input("请问还要继续生成人员数据么？\n1.是\n2.否\n:"))
+    end = int(input("\n请问还要继续生成人员数据么？\n1.是\n2.否\n:"))
     if end == 1:
         person_make()
     else:
@@ -63,7 +63,6 @@ def export_data(ALL,person,start_time):
 def person_make():
     global fake
     global origin_time
-    # print("<---------人员信息测试数据生成系统v1.2.5--------->")
     # 生成fake实例
     fake = Faker(locale='zh_CN')
     '''如果要生成中文的随机数据，我们可以在实例化时给locale参数传入‘zh_CN’这个值'''
