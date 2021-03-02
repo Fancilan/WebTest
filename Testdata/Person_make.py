@@ -1,12 +1,13 @@
 # -*-coding:utf-8-*-
-from faker import Faker
 import csv
-import time
-import numpy as np
 import getpass
 import random
+import time
 
-
+import numpy as np
+from faker import Faker
+from Excel import excel
+import RandomName
 def women_name():
     name = fake.first_name() + fake.first_name_female()
     return name
@@ -23,6 +24,16 @@ def man_name_choice(first_name):
     name = first_name + fake.first_name_male()
     return name
     # 自定义姓氏+男名
+def women_name_random():
+    A = RandomName.Names()
+    name = A.random_firstname() + fake.first_name_female()
+    return name
+    # 自定义姓氏+女名
+def man_name_random():
+    A = RandomName.Names()
+    name = A.random_firstname() + fake.first_name_male()
+    return name
+    # 百家姓+男名
 
 def export_data(ALL,person,start_time):
     cal = str(time.strftime("%Y-%m-%d", time.localtime())) +'-' +str(''.join(random.sample('0123456789',6)))
@@ -32,18 +43,15 @@ def export_data(ALL,person,start_time):
     # newline解决空白行问题
     fwrite = csv.writer(file)
     header = ["Name", "Sex", "ID", "Phone", "Birthday"]
-    # 写入变量名
     fwrite.writerow(header)
     fwrite.writerows(ALL)
-    # 写入数据嗯
-    file.close()
     end_time = time.time()
     final_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     time.sleep(0.5)
     msg = str("人员采集数量:" + str(person) + "人,成功！")
     print(msg)
     time.sleep(0.5)
-    print(str("导出成功Success！导出文件在根目录下"))
+    print(str("导出成功Success!"))
     time.sleep(0.5)
     print("人员信息预览:")
     print(np.array(ALL))
@@ -63,6 +71,7 @@ def export_data(ALL,person,start_time):
 def person_make():
     global fake
     global origin_time
+    global Name,Phone,Birthday,Sex,ID
     # 生成fake实例
     fake = Faker(locale='zh_CN')
     '''如果要生成中文的随机数据，我们可以在实例化时给locale参数传入‘zh_CN’这个值'''
@@ -91,13 +100,13 @@ def person_make():
             break
     person = int(num)
     time.sleep(0.5)
-    print("1.自定义姓氏模式\n2.随机姓氏模式")
+    print("1.自定义姓氏模式\n2.随机姓氏模式(一般随机)\n3.百家姓模式")
     select = int(input("请选择您要生成人员的信息的模式:"))
     time.sleep(0.5)
     if select == 2:
-        print("请稍等，人员数据生成中…………")
         start_time = time.time()
         origin_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        print("请稍等，人员数据生成中…………")
         for i in range(person):
             if i < person:
                 # man = fake.name_male()
@@ -127,7 +136,42 @@ def person_make():
                             break
 
                 # 生成最小年龄为19岁，最大年龄为45岁的身份证号
-                # Name.append(str(man))
+                Phone.append(str(phone))
+                ID.append(str('\n') + str(is_id))
+                # \n换个行可使身份证号后几位不消失，变为文本显示
+            else:
+                break
+    elif select == 3:
+        start_time = time.time()
+        origin_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        print("请稍等，人员数据生成中…………")
+        for i in range(person):
+            if i < person:
+                # man = fake.name_male()
+                # 生成男人的名字，有概率生成女人的名字，这个方法其实不是很好
+                phone = fake.phone_number()
+                # 生成手机号码
+                is_id = fake.ssn(min_age=19, max_age=45)
+                date = is_id
+                sex_id = date[-2]
+                if int(sex_id) % 2 == 0:
+                    man_E = women_name_random()
+                    while True:
+                        man_F = women_name_random()
+                        if man_E == man_F:
+                            continue
+                        else:
+                            Name.append(str(man_E))
+                            break
+                else:
+                    man_l = man_name_random()
+                    while True:
+                        man_h = man_name_random()
+                        if man_l == man_h:
+                            continue
+                        else:
+                            Name.append(str(man_l))
+                            break
                 Phone.append(str(phone))
                 ID.append(str('\n') + str(is_id))
                 # \n换个行可使身份证号后几位不消失，变为文本显示
@@ -182,9 +226,9 @@ def person_make():
         month = date[11:13]
         date = date[13:15]
         birthday = year + '-' + month + '-' + date
-        Birthday.append(str('\t') + birthday)
+        Birthday.append(str('\n') + birthday)
         '''提取身份证日期，然后输出为标准格式XXXX-XX-XX
-        #日期显示与身份证同理，\t'''
+        日期显示与身份证同理，\n'''
     for y in ID:
         date_1 = y
         se_id = date_1[-2]
@@ -203,10 +247,12 @@ def person_make():
         ALL[x].append(Phone[x])
         ALL[x].append(Birthday[x])
         # 二维数组循环插入，为导出CSV数据格式作准备
+    # choice = int(input("请选择要导出字段模式\n1.全导出模式\n2.姓名+身份证\n3.身份证+性别\n4.身份证+生日\n:"))
+    # print("请稍等，人员数据生成中…………")
     export_data(ALL,person,start_time)
 
 def start():
-    print("<---------人员信息测试数据生成系统v1.3--------->")
+    print("<---------人员信息测试数据生成系统v1.4--------->")
     person_make()
 
 start()
