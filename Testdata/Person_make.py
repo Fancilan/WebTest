@@ -6,7 +6,6 @@ import time
 
 import numpy as np
 from faker import Faker
-from Excel import excel
 import RandomName
 def women_name():
     name = fake.first_name() + fake.first_name_female()
