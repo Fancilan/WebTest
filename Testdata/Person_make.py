@@ -28,7 +28,7 @@ def women_name_random():
     A = RandomName.Names()
     name = A.random_firstname() + fake.first_name_female()
     return name
-    # 自定义姓氏+女名
+    # 百家姓+女名
 def man_name_random():
     A = RandomName.Names()
     name = A.random_firstname() + fake.first_name_male()
