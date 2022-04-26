@@ -46,16 +46,16 @@ def export_data(ALL,person,start_time):
     header = ["province", "school", "grade", "name", "email"]
     fwrite.writerow(header)
     print("第二阶段数据写入中………")
+    time.sleep(1)
     for o in tqdm(range(person)):
         fwrite.writerow(ALL[o])
         time.sleep(0.01)
     end_time = time.time()
     final_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    file.close()
     time.sleep(0.5)
-    msg = str("人员生成数量:" + str(person) + "人,成功！")
+    msg = str("人员数量:" + str(person) + "人,写入完成！")
     print(msg)
-    time.sleep(0.5)
-    print(str("导出成功Success!"))
     time.sleep(0.5)
     # print("人员信息预览:")
     # print(np.array(ALL))
@@ -63,7 +63,9 @@ def export_data(ALL,person,start_time):
     # time.sleep(1)
     print('开始时间：' + origin_time)
     print('结束时间：' + final_time)
-    print('Running time: %.3f 秒' % (end_time - start_time) + '\n')
+    print('总耗时长: %.3f 秒' % (end_time - start_time) + '\n')
+    time.sleep(0.5)
+    print(str("导出成功Success!"))
     print("文件路径:"+ data_name)
     time.sleep(1)
     end = int(input("\n请问还要继续生成人员数据么？\n1.是\n2.否\n:"))
@@ -102,7 +104,7 @@ def person_make():
             print("人数为0，你逗我玩呢？请重新输入！")
         elif num == '':
             print("请重新输入，再输入回车削你！")
-        elif int(num) >= 1000000:
+        elif int(num) >= 100000:
             print("人员数量超过最大生成限制，请重新输入！")
         else:
             break
@@ -184,7 +186,7 @@ def person_make():
         ALL[x].append(Grade[x])
         ALL[x].append(Name[x])
         ALL[x].append(Mail[x])
-    print("第一阶段数据生成success！")
+    print("第一阶段数据生成完成！")
     time.sleep(0.5)
     export_data(ALL,person,start_time)
 
