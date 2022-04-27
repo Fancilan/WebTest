@@ -26,13 +26,11 @@ def man_name_choice(first_name):
     return name
     # 自定义姓氏+男名
 def women_name_random():
-    A = RandomName.Names()
-    name = A.random_firstname() + fake.first_name_female()
+    name = fake_data.random_firstname() + fake.first_name_female()
     return name
     # 自定义姓氏+女名
 def man_name_random():
-    A = RandomName.Names()
-    name = A.random_firstname() + fake.first_name_male()
+    name = fake_data.random_firstname() + fake.first_name_male()
     return name
     # 百家姓+男名
 
@@ -43,12 +41,12 @@ def export_data(ALL,person,start_time):
     file = open(data_name, "w", newline='', encoding="UTF-8-sig")
     # newline解决空白行问题
     fwrite = csv.writer(file)
-    header = ["province", "school", "grade", "name", "email"]
+    header = ["province", "school", "grade", "name", "email"]   #["province", "school", "grade", "name", "email"]
     fwrite.writerow(header)
     print("第二阶段数据写入中………")
     time.sleep(1)
-    for o in tqdm(range(person)):
-        fwrite.writerow(ALL[o])
+    for o in tqdm(range(1)):
+        fwrite.writerows(ALL)
         time.sleep(0.01)
     end_time = time.time()
     final_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
@@ -122,14 +120,14 @@ def person_make():
                 if i < person:
                     man = man_name_random()
                     # 生成男人的名字，有概率生成女人的名字，这个方法其实不是很好
-                    pro = fake_data.random_province()
-                    sch = fake_data.random_school()
-                    gra = fake_data.random_class()
-                    email = fake_data.random_email()
                     Name.append(man)
-                    Province.append(pro) # 省份
+                    pro = fake_data.random_province()
+                    Province.append(pro)  # 省份
+                    sch = fake_data.random_school()
                     School.append(sch)
+                    gra = fake_data.random_class()
                     Grade.append(gra)
+                    email = fake_data.random_email()
                     Mail.append(email)
                     # \n换个行可使身份证号后几位不消失，变为文本显示
                 else:

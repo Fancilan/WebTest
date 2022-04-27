@@ -7,7 +7,7 @@ import random
 class Names():
 
 
-    def random_firstname(self):
+    def random_first_name(self):
         sample_0 = '赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜'
         sample_1 = '戚谢邹喻柏水窦章云苏潘葛奚范彭郎鲁韦昌马苗凤花方俞任袁柳酆鲍史唐'
         sample_2 = '费廉岑薛雷贺倪汤滕殷罗毕邬安常乐于时傅皮卞齐康伍余元卜顾孟平黄'
